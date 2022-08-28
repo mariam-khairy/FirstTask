@@ -1,0 +1,146 @@
+CREATE DATABASE `untitied`;
+
+//table for user
+CREATE TABLE `users`(
+id BIGINT(20) AUTO_INCREMENT PRIMARY KEY,
+firstname VARCHAR(20),
+middlename VARCHAR(20),
+username VARCHAR (20),
+mobile VARCHAR(20),
+email VARCHAR (20),
+passwordHash VARCHAR(20),
+regeterdid DATETIME,	
+lastigin datetime,
+intro tinytext,
+profilee text
+);
+ 
+//table for mygroup
+CREATE TABLE `mygroup`(
+id BIGINT(20) AUTO_INCREMENT PRIMARY KEY,
+createdBY bigint(20),
+FORIGN KEY(createdBY) REFRENCES users(id),
+updatedBY bigint(20),
+FORIGN KEY(createdBY) REFRENCES users(id),
+slug varchar(100),
+title varchar(20),
+metatitle varchar(20),
+sammury tinytext,
+statuss smallint(6),
+createdAT datetime,
+updatedAt datetime,
+profileText text,
+content text
+);
+ 
+//table for group_meta
+CREATE TABLE group_meta(
+id BIGINT(20) AUTO_INCREMENT PRIMARY KEY,
+groupID bigint(20),
+FORIGN KEY (groupID) REFRENCES mygroup (id),
+keyy bigint(20),
+content text
+);
+ 
+//table for group_member
+CREATE TABLE group_member (
+id BIGINT(20) AUTO_INCREMENT PRIMARY KEY,
+groupID bigint(20),
+FORIGN KEY (groupID) REFRENCES mygroup (id),
+userID bigint(20)
+FORIGN KEY (userID) REFRENCES users(id),
+type smallint(8),
+statuss smallint(6),
+createdAT datetime,
+updatedAT datetime,
+notes text
+);
+ 
+//table for group_post
+CREATE TABLE group_post(
+id BIGINT(20) AUTO_INCREMENT PRIMARY KEY,
+groupID bigint(20),
+FORIGN KEY (groupID) REFRENCES mygroup (id),
+userID bigint(20)
+FORIGN KEY (userID) REFRENCES users(id),
+createdAT datetime,
+updatedAT datetime,
+message text
+);
+   
+ 
+//table for group_follower
+CREATE TABLE group_follower(
+id BIGINT(20) AUTO_INCREMENT PRIMARY KEY,
+groupID bigint(20),
+FORIGN KEY (groupID) REFRENCES mygroup (id),
+userID bigint(20)
+FORIGN KEY (userID) REFRENCES users(id),
+type text,
+createdAT datetime,
+updatedAT datetime
+);
+  
+
+//table for group_message
+CREATE TABLE group_message(
+id BIGINT(20) AUTO_INCREMENT PRIMARY KEY,
+groupID bigint(20),
+FORIGN KEY (groupID) REFRENCES mygroup (id),
+userID bigint(20)
+FORIGN KEY (userID) REFRENCES users(id),
+message text,
+createdAT datetime,
+updatedAT datetime
+);
+
+//table for user_follower
+CREATE TABLE user_follower(
+ id BIGINT(20) AUTO_INCREMENT PRIMARY KEY,
+sourceID bigint(20),
+FORIGN KEY (sourceID) REFRENCES users (id),
+targetID bigint(20)
+FORIGN KEY (targetID) REFRENCES users(id),
+type text,
+createdAT datetime,
+updatedAT datetime
+);
+
+//table for user_message
+CREATE TABLE user_message(
+ id BIGINT(20) AUTO_INCREMENT PRIMARY KEY,
+sourceID bigint(20),
+FORIGN KEY (sourceID) REFRENCES users (id),
+targetID bigint(20)
+FORIGN KEY (targetID) REFRENCES users(id),
+createdAT datetime,
+updatedAT datetime,
+message tinytext
+);
+ 
+//table for user_friend
+CREATE TABLE user_friend(
+  id BIGINT(20) AUTO_INCREMENT PRIMARY KEY,
+sourceID bigint(20),
+FORIGN KEY (sourceID) REFRENCES users (id),
+targetID bigint(20)
+FORIGN KEY (targetID) REFRENCES users(id),
+type smallint(8),
+statuss smallint(6),
+createdAT datetime,
+updatedAT datetime,
+notes text
+);
+  
+//table for user_post
+CREATE TABLE user_post(
+ id BIGINT(20) AUTO_INCREMENT PRIMARY KEY,
+userID bigint(20),
+FORIGN KEY (userID) REFRENCES users (id),
+senderID bigint(20)
+FORIGN KEY (senderID) REFRENCES users(id),
+message smallint(6),
+createdAT datetime,
+updatedAT datetime
+);
+                                                                                                *****FINISH*****
